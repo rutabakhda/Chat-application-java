@@ -101,14 +101,23 @@ class clientThread extends Thread {
       is = new DataInputStream(clientSocket.getInputStream());
       os = new PrintStream(clientSocket.getOutputStream());
       String name;
+      String password;
       while (true) {
         os.println("Enter your name.");
         name = is.readLine().trim();
         if (name.indexOf('@') == -1) {
-          break;
+            os.println("Enter the password.");
+            password = is.readLine().trim();
+            if (password.equals("test123")) {
+              break;
+            } else {
+              os.println("you have entered the wrong password");
+            }
+
         } else {
           os.println("The name should not contain '@' character.");
         }
+
       }
 
       /* Welcome the new the client. */
